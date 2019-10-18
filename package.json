@@ -24,9 +24,9 @@
     "android"
   ],
   "dependencies": {
-    "google-libphonenumber": "^3.2.2",
-    "lodash": "^4.17.4",
-    "prop-types": "^15.5.10"
+    "google-libphonenumber": "^3.2.5",
+    "lodash": "^4.17.15",
+    "prop-types": "^15.7.2"
   },
   "peerDependencies": {
     "react-native": ">= 0.25"
