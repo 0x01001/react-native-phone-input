@@ -18,7 +18,7 @@ export default StyleSheet.create({
   },
 
   optionContainer: {
-    borderRadius: BORDER_RADIUS,
+    // borderRadius: BORDER_RADIUS,
     width: width * 0.8,
     height: OPTION_CONTAINER_HEIGHT,
     backgroundColor: 'rgba(255,255,255,0.8)',
@@ -36,7 +36,7 @@ export default StyleSheet.create({
     borderColor: '#ccc',
     borderWidth: 1,
     padding: 8,
-    borderRadius: BORDER_RADIUS,
+    // borderRadius: BORDER_RADIUS,
   },
 
   selectTextStyle: {
@@ -46,7 +46,7 @@ export default StyleSheet.create({
   },
 
   cancelStyle: {
-    borderRadius: BORDER_RADIUS,
+    // borderRadius: BORDER_RADIUS,
     width: width * 0.8,
     backgroundColor: 'rgba(255,255,255,0.8)',
     padding: PADDING,
@@ -55,13 +55,13 @@ export default StyleSheet.create({
   cancelTextStyle: {
     textAlign: 'center',
     color: '#333',
-    fontSize: FONT_SIZE,
+    fontSize: 18,
   },
 
   optionStyle: {
     padding: PADDING,
-    borderBottomWidth: 1,
-    borderBottomColor: '#ccc',
+    borderWidth: 1,
+    borderColor: '#000',
     flex: 1,
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -83,12 +83,12 @@ export default StyleSheet.create({
   optionLabelStyle: {
     textAlign: 'center',
     color: '#434343',
-    fontSize: 14,
+    fontSize: FONT_SIZE,
   },
   optionDialCodeStyle: {
     textAlign: 'center',
     color: 'grey',
-    fontSize: 12,
+    fontSize: 14,
   },
 
   sectionStyle: {

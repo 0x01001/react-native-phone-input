@@ -1,6 +1,6 @@
 import React from 'react';
-import { View, Modal, Text, FlatList, TouchableOpacity, Image } from 'react-native';
-
+import { View, Modal, Text, FlatList, TouchableOpacity, Dimensions } from 'react-native';
+import { RecyclerListView, DataProvider, LayoutProvider } from 'recyclerlistview';
 import PropTypes from 'prop-types';
 
 import styles from './style';
@@ -41,47 +41,72 @@ const defaultProps = {
   cancelText: 'cancel',
 };
 
+let { height, width } = Dimensions.get('window');
+
 export default class ModalPicker extends BaseComponent {
-  constructor() {
-    super();
-
-    this._bind('onChange', 'open', 'close', 'renderChildren');
-
+  constructor(props) {
+    super(props);
+    //this._bind('onChange', 'open', 'close', 'renderChildren');
     this.state = {
       animationType: 'slide',
       modalVisible: false,
       transparent: false,
       selected: 'please select',
-      data: [],
+      // data: [],
+      dataProvider: new DataProvider((r1, r2) => r1 !== r2).cloneWithRows(props.data),
     };
+    this.layoutProvider = new LayoutProvider(
+      i => {
+        return this.state.dataProvider.getDataForIndex(i).line;
+      },
+      (type, dim) => {
+        switch (type) {
+          case 1:
+            dim.width = width;
+            dim.height = 37;
+            break;
+          case 2:
+            dim.width = width;
+            dim.height = 55;
+            break;
+          case 3:
+            dim.width = width;
+            dim.height = 74;
+            break;
+          default:
+            dim.width = width;
+            dim.height = 37;
+        }
+      },
+    );
   }
 
   componentDidMount() {
-    this.setState({ selected: this.props.initValue });
-    this.setState({ cancelText: this.props.cancelText });
+    // this.setState({ selected: this.props.initValue });
+    // this.setState({ cancelText: this.props.cancelText });
   }
 
-  UNSAFE_componentWillReceiveProps(nextProps) {
-    this.setState({ data: nextProps.data });
-  }
+  // UNSAFE_componentWillReceiveProps(nextProps) {
+  //   this.setState({ data: nextProps.data });
+  // }
 
-  onChange(item) {
-    this.props.onChange(item);
-    this.setState({ selected: item.label });
+  onChange = data => {
+    this.props.onChange(data);
+    this.setState({ selected: data.label });
     this.close();
-  }
+  };
 
-  close() {
+  close = () => {
     this.setState({
       modalVisible: false,
     });
-  }
+  };
 
-  open() {
+  open = () => {
     this.setState({
       modalVisible: true,
     });
-  }
+  };
 
   // renderSection(section) {
   //   return (
@@ -91,11 +116,15 @@ export default class ModalPicker extends BaseComponent {
   //   );
   // }
 
-  renderOption = ({ item }) => {
-    return <Item data={item} onPress={() => this.onChange(item)} />;
+  // renderOption = ({ item }) => {
+  //   return <Item data={item} onPress={() => this.onChange(item)} />;
+  // };
+
+  renderRow = (type, data) => {
+    return <Item data={data} onPress={() => this.onChange(data)} />;
   };
 
-  renderOptionList() {
+  renderOptionList = () => {
     // const options = this.state.data.map(item => {
     //   if (item.section) {
     //     console.log('section.....');
@@ -110,7 +139,15 @@ export default class ModalPicker extends BaseComponent {
       return (
         <View style={[styles.overlayStyle, this.props.overlayStyle]} key={`modalPicker${componentIndex++}`}>
           <View style={styles.optionContainer}>
-            <FlatList style={styles.optionList} data={data} renderItem={this.renderOption} keyExtractor={(x, i) => x.key} />
+            <RecyclerListView
+              // style={styles.optionList}
+              rowRenderer={this.renderRow}
+              dataProvider={this.state.dataProvider}
+              layoutProvider={this.layoutProvider}
+              onEndReachedThreshold={500}
+              contentContainerStyle={{ borderWidth: 1, borderColor: '#ff0000' }}
+            />
+            {/* <FlatList style={styles.optionList} data={data} renderItem={this.renderOption} keyExtractor={(x, i) => x.key} /> */}
             {/* <ScrollView keyboardShouldPersistTaps="always">
               <View style={{ paddingHorizontal: 10 }}>{options}</View>
             </ScrollView> */}
@@ -126,13 +163,13 @@ export default class ModalPicker extends BaseComponent {
       );
     }
     return null;
-  }
+  };
 
-  renderChildren() {
+  renderChildren = () => {
     if (this.props.children) {
       return this.props.children;
     }
-  }
+  };
 
   render() {
     const dp = (
