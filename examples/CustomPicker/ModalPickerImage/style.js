@@ -17,11 +17,17 @@ export default StyleSheet.create({
     backgroundColor: 'rgba(0,0,0,0.7)',
   },
 
+  containerStyle: {
+    // borderWidth: 1,
+    // borderColor: '#ff0000',
+    justifyContent: 'center',
+  },
+
   optionContainer: {
     // borderRadius: BORDER_RADIUS,
     width: width * 0.8,
     height: OPTION_CONTAINER_HEIGHT,
-    backgroundColor: 'rgba(255,255,255,0.8)',
+    backgroundColor: 'rgba(255,255,255,0.9)',
     left: width * 0.1,
     top: (height - OPTION_CONTAINER_HEIGHT) / 2,
   },
@@ -48,7 +54,7 @@ export default StyleSheet.create({
   cancelStyle: {
     // borderRadius: BORDER_RADIUS,
     width: width * 0.8,
-    backgroundColor: 'rgba(255,255,255,0.8)',
+    backgroundColor: 'rgba(255,255,255,0.9)',
     padding: PADDING,
   },
 
@@ -60,19 +66,20 @@ export default StyleSheet.create({
 
   optionStyle: {
     padding: PADDING,
-    borderWidth: 1,
-    borderColor: '#000',
-    flex: 1,
+    borderBottomWidth: 1,
+    borderColor: '#B2BDC1',
     flexDirection: 'row',
     justifyContent: 'space-between',
-    alignItems: 'center',
+    alignItems: 'stretch',
+    width: width * 0.8,
   },
 
   optionList: { paddingHorizontal: 10 },
 
-  optionView1: { flex: 0.15 },
+  optionView1: { flex: 0.15, justifyContent: 'center' },
   optionView2: { flex: 0.7, alignItems: 'center' },
-  optionView3: { flex: 0.15, alignItems: 'flex-end' },
+  optionView3: { flex: 0.15, alignItems: 'flex-end', justifyContent: 'center' },
+
   optionImage: { width: 30, height: 16 },
 
   optionTextStyle: {

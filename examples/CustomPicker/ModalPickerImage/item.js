@@ -19,15 +19,15 @@ export default class Item extends PureComponent {
     const { data, onPress } = this.props;
     return (
       <TouchableOpacity key={data.key} onPress={() => onPress()}>
-        <View style={[styles.optionStyle, this.props.optionStyle]}>
+        <View style={styles.optionStyle}>
           <View style={styles.optionView1}>
             <FastImage source={data.image} resizeMode={FastImage.resizeMode.stretch} style={styles.optionImage} />
           </View>
           <View style={styles.optionView2}>
-            <Text style={[styles.optionLabelStyle, this.props.optionTextStyle]}>{data.label}</Text>
+            <Text style={styles.optionLabelStyle}>{data.label}</Text>
           </View>
           <View style={styles.optionView3}>
-            <Text style={[styles.optionDialCodeStyle, this.props.optionTextStyle]}>{data.dialCode}</Text>
+            <Text style={styles.optionDialCodeStyle}>{data.dialCode}</Text>
           </View>
         </View>
       </TouchableOpacity>

@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Modal, Text, FlatList, TouchableOpacity, Dimensions } from 'react-native';
-import { RecyclerListView, DataProvider, LayoutProvider } from 'recyclerlistview';
+import { RecyclerListView, DataProvider, LayoutProvider, BaseItemAnimator } from 'recyclerlistview';
 import PropTypes from 'prop-types';
 
 import styles from './style';
@@ -57,26 +57,11 @@ export default class ModalPicker extends BaseComponent {
     };
     this.layoutProvider = new LayoutProvider(
       i => {
-        return this.state.dataProvider.getDataForIndex(i).line;
+        return 0;
       },
       (type, dim) => {
-        switch (type) {
-          case 1:
-            dim.width = width;
-            dim.height = 37;
-            break;
-          case 2:
-            dim.width = width;
-            dim.height = 55;
-            break;
-          case 3:
-            dim.width = width;
-            dim.height = 74;
-            break;
-          default:
-            dim.width = width;
-            dim.height = 37;
-        }
+        dim.width = width;
+        dim.height = 37;
       },
     );
   }
@@ -145,7 +130,8 @@ export default class ModalPicker extends BaseComponent {
               dataProvider={this.state.dataProvider}
               layoutProvider={this.layoutProvider}
               onEndReachedThreshold={500}
-              contentContainerStyle={{ borderWidth: 1, borderColor: '#ff0000' }}
+              forceNonDeterministicRendering
+              itemAnimator={new BaseItemAnimator()}
             />
             {/* <FlatList style={styles.optionList} data={data} renderItem={this.renderOption} keyExtractor={(x, i) => x.key} /> */}
             {/* <ScrollView keyboardShouldPersistTaps="always">
